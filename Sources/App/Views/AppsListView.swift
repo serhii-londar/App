@@ -253,7 +253,7 @@ struct AppSectionItems : View {
                 Text("No apps", comment: "apps list placeholder text where there are no results to display")
             } else if itemCount > displayCount {
                 Text("More…", comment: "apps list text at the bottom of the list when there are more results to show")
-                    .id((items.last?.id.rawValue ?? "") + "_moreitems") // the id needs to change so onAppear is called when we see this item again
+                    .id((items.last?.id?.rawValue ?? "") + "_moreitems") // the id needs to change so onAppear is called when we see this item again
                     .onAppear {
                         dbg("showing more items (\(displayCount) of \(items.count))")
                         DispatchQueue.main.async {

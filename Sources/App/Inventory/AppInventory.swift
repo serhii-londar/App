@@ -135,9 +135,9 @@ public protocol AppInventory {
 public struct AppIconView : View {
     /// Wraps the internal views
     #if os(macOS)
-    typealias ViewType = XOr<AppSourceInventory.IconView>.Or<HomebrewInventory.IconView>
+    typealias ViewType = Either<AppSourceInventory.IconView>.Or<HomebrewInventory.IconView>
     #else
-    typealias ViewType = XOr<AppSourceInventory.IconView>.Or<Never>
+    typealias ViewType = Either<AppSourceInventory.IconView>.Or<Never>
     #endif
     let content: ViewType
 

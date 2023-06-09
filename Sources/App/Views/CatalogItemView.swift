@@ -62,11 +62,13 @@ private struct CatalogItemHostView: View {
 
     private var currentOperation: CatalogOperation? {
         get {
-            fairManager.operations[info.id]
+            info.id.flatMap { fairManager.operations[$0] }
         }
 
         nonmutating set {
-            fairManager.operations[info.id] = newValue
+            if let id = info.id {
+                fairManager.operations[id] = newValue
+            }
         }
     }
 
@@ -1764,8 +1766,8 @@ struct SecurityBox : View {
                 return .success(AttributedString(scanResult.data.utf8String ?? ""))
             } else {
                 do {
-                    let ob = try JSum(json: scanResult.data)
-                    let pretty = try ob.json(outputFormatting: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
+                    let ob = try JSON.parse(scanResult.data)
+                    let pretty = try ob.toJSON(outputFormatting: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
                     return .success(AttributedString(pretty.utf8String ?? ""))
                 } catch {
                     return .success(AttributedString(scanResult.data.utf8String ?? ""))

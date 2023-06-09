@@ -160,15 +160,15 @@ struct WelcomeView : View {
              subtitle: NSLocalizedString("about-card-01-caption", bundle: .module, value: "to the App Fair Project", comment: "app intro card #1 caption markdown"),
              body: NSLocalizedString("about-card-01-content", bundle: .module, value: "The App Fair Project is a non-profit organization dedicated to creating digital public goods for a global audience.", comment: "app intro card #1 content markdown")),
 
-        card("magnifyingglass", color: cardColors.next(),
-             title: NSLocalizedString("about-card-02-banner", bundle: .module, value: wip("TODO"), comment: "app intro card #2 banner markdown"),
-             subtitle: NSLocalizedString("about-card-02-caption", bundle: .module, value: "Interesting Projects", comment: "app intro card #2 caption markdown"),
-             body: NSLocalizedString("about-card-02-content", bundle: .module, value: wip("TODO"), comment: "app intro card #2 content markdown")),
-
-        card("app.gift", color: cardColors.next(),
-             title: NSLocalizedString("about-card-03-banner", bundle: .module, value: wip("TODO"), comment: "app intro card #3 banner markdown"),
-             subtitle: NSLocalizedString("about-card-03-caption", bundle: .module, value: "", comment: "app intro card #3 caption markdown"),
-             body: NSLocalizedString("about-card-03-content", bundle: .module, value: wip("TODO"), comment: "app intro card #3 content markdown")),
+//        card("magnifyingglass", color: cardColors.next(),
+//             title: NSLocalizedString("about-card-02-banner", bundle: .module, value: wip("TODO"), comment: "app intro card #2 banner markdown"),
+//             subtitle: NSLocalizedString("about-card-02-caption", bundle: .module, value: "Interesting Projects", comment: "app intro card #2 caption markdown"),
+//             body: NSLocalizedString("about-card-02-content", bundle: .module, value: wip("TODO"), comment: "app intro card #2 content markdown")),
+//
+//        card("app.gift", color: cardColors.next(),
+//             title: NSLocalizedString("about-card-03-banner", bundle: .module, value: wip("TODO"), comment: "app intro card #3 banner markdown"),
+//             subtitle: NSLocalizedString("about-card-03-caption", bundle: .module, value: "", comment: "app intro card #3 caption markdown"),
+//             body: NSLocalizedString("about-card-03-content", bundle: .module, value: wip("TODO"), comment: "app intro card #3 content markdown")),
     ]
     .compactMap({ $0 })
 

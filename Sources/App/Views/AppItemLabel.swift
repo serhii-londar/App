@@ -51,7 +51,7 @@ struct AppItemLabel : View {
             ZStack {
                 fairManager.iconView(for: item, transition: true)
 
-                if let progress = fairManager.operations[item.id]?.progress {
+                if let id = item.id, let progress = fairManager.operations[id]?.progress {
                     FairProgressView(progress)
                         .progressViewStyle(PieProgressViewStyle(lineWidth: 50))
                         .foregroundStyle(Color.secondary)

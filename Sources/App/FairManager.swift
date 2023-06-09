@@ -43,6 +43,8 @@ extension Never : FacetView {
 }
 
 open class FairManager: SceneManager, AppInventoryController {
+    public static var bundle: Bundle = .module
+    
     @AppStorage("themeStyle") var themeStyle = ThemeStyle.system
 
     @AppStorage("enableInstallWarning") public var enableInstallWarning: Bool = true
@@ -345,8 +347,8 @@ extension FairManager {
             
             ScrollView {
                 Group {
-                    if showText, let info = info, let overview = info.overviewText {
-                        overview.joined(separator: Text(verbatim: "\n\n"))
+                    if showText, let info = info {
+                        info.overviewText.joined(separator: Text(verbatim: "\n\n"))
                                 .font(Font.title2)
                     }
                     if let description = (inv as? AppSourceInventory)?.catalogSuccess?.localizedDescription {
