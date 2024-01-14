@@ -62,6 +62,19 @@ extension SidebarSelection {
             case .category(let category):
                 return CategoryAppInfo(category: category)
             }
+        case .openSourceAppsRepo:
+            switch self.item {
+            case .top:
+                return OpenSourceAppsInfo.TopAppInfo()
+            case .recent: // not supported with casks
+                return OpenSourceAppsInfo.RecentAppInfo()
+            case .installed:
+                return OpenSourceAppsInfo.InstalledAppInfo()
+            case .updated:
+                return OpenSourceAppsInfo.UpdatedAppInfo()
+            case .category(let category):
+                return CategoryAppInfo(category: category)
+            }
         }
     }
 
@@ -178,6 +191,118 @@ extension SidebarSelection {
     }
 
     private enum FairappsSourceInfo {
+        struct TopAppInfo : AppSourceInfo {
+            func tintedLabel(monochrome: Bool) -> TintedLabel {
+                TintedLabel(title: Text("Apps", bundle: .module, comment: "fairapps sidebar category title"), symbol: AppSource.fairapps.symbol, tint: monochrome ? nil : Color.accentColor, mode: monochrome ? .monochrome : .multicolor)
+            }
+
+            /// Subtitle text for this source
+            var fullTitle: Text {
+                Text("Fairground Apps", bundle: .module, comment: "fairapps top apps info: full title")
+            }
+
+            /// A textual description of this source
+            var overviewText: Text? {
+                Text("""
+                Fairground apps are created through the appfair.net process. They are 100% open-source and disclose all their permissions in their App Fair catalog entry.
+
+                Apps installed from the Fairground catalog are guaranteed to run in a sandbox, meaning that access to resources like the filesystem, network, and devices are mediated through a security layer that mandates that their permissions be documented, disclosed, and approved by the user. Fairground apps publish a “risk level” summarizing the number of permission categories the app requests.
+                """, bundle: .module, comment: "fairapps top apps info: overview text")
+            }
+
+            var footerText: Text? {
+                Text("Learn more about the fairground process at [https://appfair.net](https://appfair.net)", bundle: .module, comment: "fairground top apps info: footer link text")
+            }
+
+            /// A list of the features of this source, which will be laid in order
+            var featureInfo: [(FairSymbol, Text)] {
+                []
+            }
+        }
+
+        struct RecentAppInfo : AppSourceInfo {
+            func tintedLabel(monochrome: Bool) -> TintedLabel {
+                TintedLabel(title: Text("Recent", bundle: .module, comment: "fairapps sidebar category title"), symbol: .clock_fill, tint: monochrome ? nil : Color.yellow, mode: monochrome ? .monochrome : .multicolor)
+            }
+
+            /// Subtitle text for this source
+            var fullTitle: Text {
+                Text("Fairground Apps: Recent", bundle: .module, comment: "fairapps recent apps info: full title")
+            }
+
+            /// A textual description of this source
+            var overviewText: Text? {
+                nil
+                // Text(wip("XXX"), bundle: .module, comment: "fairapps recent apps info: overview text")
+            }
+
+            var footerText: Text? {
+                nil
+                // Text(wip("XXX"), bundle: .module, comment: "homebrew recent apps info: overview text")
+            }
+
+            /// A list of the features of this source, which will be laid in order
+            var featureInfo: [(FairSymbol, Text)] {
+                []
+            }
+        }
+
+        struct InstalledAppInfo : AppSourceInfo {
+            func tintedLabel(monochrome: Bool) -> TintedLabel {
+                TintedLabel(title: Text("Installed", bundle: .module, comment: "fairapps sidebar category title"), symbol: .externaldrive_fill, tint: monochrome ? nil : Color.orange, mode: monochrome ? .monochrome : .multicolor)
+            }
+
+            /// Subtitle text for this source
+            var fullTitle: Text {
+                Text("Fairground Apps: Installed", bundle: .module, comment: "fairapps installed apps info: full title")
+            }
+
+            /// A textual description of this source
+            var overviewText: Text? {
+                nil
+                // Text(wip("XXX"), bundle: .module, comment: "fairapps installed apps info: overview text")
+            }
+
+            var footerText: Text? {
+                nil
+                // Text(wip("XXX"), bundle: .module, comment: "homebrew recent apps info: overview text")
+            }
+
+            /// A list of the features of this source, which will be laid in order
+            var featureInfo: [(FairSymbol, Text)] {
+                []
+            }
+        }
+
+        struct UpdatedAppInfo : AppSourceInfo {
+            func tintedLabel(monochrome: Bool) -> TintedLabel {
+                TintedLabel(title: Text("Updated", bundle: .module, comment: "fairapps sidebar category title"), symbol: .arrow_down_app_fill, tint: monochrome ? nil : Color.green, mode: monochrome ? .monochrome : .multicolor)
+            }
+
+            /// Subtitle text for this source
+            var fullTitle: Text {
+                Text("Fairground Apps: Updated", bundle: .module, comment: "fairapps updated apps info: full title")
+            }
+
+            /// A textual description of this source
+            var overviewText: Text? {
+                nil
+                // Text(wip("XXX"), bundle: .module, comment: "fairapps updated apps info: overview text")
+            }
+
+            var footerText: Text? {
+                nil
+                // Text(wip("XXX"), bundle: .module, comment: "homebrew recent apps info: overview text")
+            }
+
+            /// A list of the features of this source, which will be laid in order
+            var featureInfo: [(FairSymbol, Text)] {
+                []
+            }
+        }
+    }
+
+    private enum OpenSourceAppsInfo {
         struct TopAppInfo : AppSourceInfo {
             func tintedLabel(monochrome: Bool) -> TintedLabel {
                 TintedLabel(title: Text("Apps", bundle: .module, comment: "fairapps sidebar category title"), symbol: AppSource.fairapps.symbol, tint: monochrome ? nil : Color.accentColor, mode: monochrome ? .monochrome : .multicolor)

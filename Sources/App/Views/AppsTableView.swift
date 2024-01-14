@@ -35,6 +35,8 @@ struct AppsTableView : View, ItemTableView {
             return fairManager.homeBrewInv.arrangedItems(sidebarSelection: sidebarSelection, sortOrder: sortOrder, searchText: searchText)
         case .fairapps:
             return fairManager.fairAppInv.arrangedItems(sidebarSelection: sidebarSelection, sortOrder: sortOrder, searchText: searchText)
+        case .openSourceAppsRepo:
+            return []
         }
     }
 

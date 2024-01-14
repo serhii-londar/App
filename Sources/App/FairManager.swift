@@ -48,6 +48,9 @@ import Combine
     /// The caskManager, which should be extracted as a separate `EnvironmentObject`
     @Published var homeBrewInv: HomebrewInventory
 
+    @Published var openSourceAppsInv: OpenSourceAppsInventory
+
+    
     /// The apps that have been installed or updated in this session
     @Published var sessionInstalls: Set<AppInfo.ID> = []
 
@@ -62,7 +65,8 @@ import Combine
     required internal init() {
         self.fairAppInv = FairAppInventory.default
         self.homeBrewInv = HomebrewInventory.default
-
+        self.openSourceAppsInv = OpenSourceAppsInventory.default
+        
         super.init()
 
         // track any changes to fairAppInv and homeBrewInv and broadcast their changes

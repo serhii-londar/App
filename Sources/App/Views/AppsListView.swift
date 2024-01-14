@@ -35,6 +35,7 @@ struct AppsListView : View {
         switch source {
         case .homebrew: return fairManager.homeBrewInv
         case .fairapps: return fairManager.fairAppInv
+        case .openSourceAppsRepo: return fairManager.openSourceAppsInv
         }
     }
 
@@ -151,6 +152,8 @@ struct AppsListView : View {
             return fairManager.homeBrewInv.arrangedItems(sidebarSelection: sidebarSelection, sortOrder: sortOrder, searchText: searchText)
         case .fairapps:
             return fairManager.fairAppInv.arrangedItems(sidebarSelection: sidebarSelection, sortOrder: sortOrder, searchText: searchText)
+        case .openSourceAppsRepo:
+            return []
         }
     }
 

@@ -19,6 +19,7 @@ import Combine
 public enum AppSource: String, CaseIterable {
     case homebrew
     case fairapps
+    case openSourceAppsRepo
 }
 
 extension AppSource : Identifiable {
@@ -33,6 +34,8 @@ public extension AppSource {
             return Label { Text("Fairground", bundle: .module, comment: "app source title for fairground apps") } icon: { symbol.image }
         case .homebrew:
             return Label { Text("Homebrew", bundle: .module, comment: "app source title for homebrew apps") } icon: { symbol.image }
+        case .openSourceAppsRepo:
+            return Label { Text("Open Source macOS Apps Repo", bundle: .module, comment: "app source title for homebrew apps") } icon: { symbol.image }
         }
     }
 
@@ -42,6 +45,8 @@ public extension AppSource {
             return .ticket
         case .homebrew:
             return .shippingbox_fill
+        case .openSourceAppsRepo:
+            return .ticket // TODO: Change
         }
     }
 }
@@ -727,6 +732,13 @@ extension SidebarSelection {
             case .category(_):
                 return Font.system(size: size, weight: .regular, design: .default)
             }
+        case .openSourceAppsRepo: //TODO: Change?
+            switch self.item {
+            case .top, .updated, .installed, .recent:
+                return Font.system(size: size, weight: .regular, design: .rounded)
+            case .category(_):
+                return Font.system(size: size, weight: .regular, design: .default)
+            }
         }
     }
 
@@ -985,7 +997,15 @@ struct SidebarView: View {
                         sectionHeader(label: source.label, updating: fairManager.fairAppInv.updateInProgress != 0)
 
                     }
+                case .openSourceAppsRepo:
+                    Section {
+                        openSourceAppsItems()
+                            .symbolVariant(.fill)
+                    } header: {
+                        sectionHeader(label: source.label, updating: fairManager.fairAppInv.updateInProgress != 0)
+                    }
                 }
+            
             }
 
             // categories section
@@ -1042,6 +1062,16 @@ struct SidebarView: View {
             navitem(items.3.sel)
         }
     }
+    
+    func openSourceAppsItems() -> some View {
+        Group {
+            let items = SidebarSelection.fairappsItems
+            navitem(items.0.sel)
+            navitem(items.1.sel)
+            navitem(items.2.sel)
+            navitem(items.3.sel)
+        }
+    }
 
     func navitem(_ selection: SidebarSelection) -> some View {
         let label = selection.sourceInfo.tintedLabel(monochrome: false)
@@ -1063,6 +1093,8 @@ struct SidebarView: View {
             return fairManager.fairAppInv.badgeCount(for: item.item)
         case .homebrew:
             return fairManager.homeBrewInv.badgeCount(for: item.item)
+        case .openSourceAppsRepo:
+            return fairManager.openSourceAppsInv.badgeCount(for: item.item)
         }
     }
 
@@ -1106,6 +1138,13 @@ extension SidebarSelection {
         (sel: SidebarSelection(source: .fairapps, item: .recent), key: KeyEquivalent("5")),
         (sel: SidebarSelection(source: .fairapps, item: .installed), key: KeyEquivalent("6")),
         (sel: SidebarSelection(source: .fairapps, item: .updated), key: KeyEquivalent("7"))
+    )
+    
+    static let openSourceAppsItems = (
+        (sel: SidebarSelection(source: .openSourceAppsRepo, item: .top), key: KeyEquivalent("8")),
+        (sel: SidebarSelection(source: .openSourceAppsRepo, item: .recent), key: KeyEquivalent("9")),
+        (sel: SidebarSelection(source: .openSourceAppsRepo, item: .installed), key: KeyEquivalent("a")),
+        (sel: SidebarSelection(source: .openSourceAppsRepo, item: .updated), key: KeyEquivalent("b"))
     )
 }
 
